@@ -40,11 +40,12 @@ _run_export_command() {
 
 # ------------------------------------------------------------------- Test Cases
 
+
 test_export_properties() {
     local pid=$1
     local test_dir="$TMP_DIR/test_export_properties"
     rm -rf "$test_dir"; mkdir -p "$test_dir"
-
+    
     #################################################################
     # Iterate over all bugs
     #################################################################
@@ -59,11 +60,11 @@ test_export_properties() {
         # Check "dir.bin.tests"
         #################################################################
         local test_classes_dir=""
-        test_classes_dir=$(_run_export_command "$work_dir" "dir.bin.tests")
+	test_classes_dir=$(_run_export_command "$work_dir" "dir.bin.tests")
         if [ $? -ne 0 ]; then
             die "Export command of $pid-$bid has failed"
         fi
-
+	
         local expected=""
         if [ "$pid" == "Chart" ]; then
             expected="build-tests"
@@ -131,8 +132,8 @@ test_export_properties() {
         [ "$test_classes_dir" == "$expected" ] || die "Actual test classes directory of $pid-$bid ('$test_classes_dir') is not the one expected ('$expected')"
 
         #################################################################
-        # Check "dir.bin.classes"
-        #################################################################
+       # Check "dir.bin.classes"
+       #################################################################
         local classes_dir=""
         classes_dir=$(_run_export_command "$work_dir" "dir.bin.classes")
         if [ $? -ne 0 ]; then
